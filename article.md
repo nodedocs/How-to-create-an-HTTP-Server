@@ -2,22 +2,24 @@
 
 Building an HTTP Server in Node is simple. Let's start with the classic "Hello World" HTTP Server:
 
-    var http = require('http');
+```javascript
+var http = require('http');
 
-	function requestListener (req, res) {
-		res.setHeader('Content-Type', 'text/plain');
-		res.write('Hello World!');
-		res.end();
-	}
+function requestListener (req, res) {
+	res.setHeader('Content-Type', 'text/plain');
+	res.write('Hello World!');
+	res.end();
+}
 
-	var server = http.createServer();
+var server = http.createServer();
 
-	server.on('request', requestListener);
+server.on('request', requestListener);
 
-	server.listen(8080, function() {
-	  var address = server.address();
-	  console.log('Server listening on', address);
-	});
+server.listen(8080, function() {
+  var address = server.address();
+  console.log('Server listening on', address);
+});
+```
 
 This example is extremely verbose - we could have economized a lot of characters - , but this is better for you to fully understand what is going on.
 
@@ -49,15 +51,17 @@ You can then direct your browser to [http://localhost:8080](http://localhost:808
 
 Once you fully understand it, you can trim down the "Hello World" server script to:
 
-    function requestListener (req, res) {
-	  res.setHeader('Content-Type', 'text/plain');
-	  res.end('Hello World!');
-	}
-	
-	server = require('http').createServer(requestListener);
-	server.listen(8080, function() {
-	  console.log('Server listening on', server.address());
-	});
+```javascript
+function requestListener (req, res) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World!');
+}
+
+server = require('http').createServer(requestListener);
+server.listen(8080, function() {
+  console.log('Server listening on', server.address());
+});
+```
 
 First we are passing the `requestListener` function as the first argument of the `http.createServer` function, which is a shortcut for binding it to the "request" event.
 
